@@ -1,9 +1,7 @@
-obj-m := usbd.o
+obj-m := Pendrive.o
 
-KERNEL_DIR = /lib/modules/$(shell uname -r)/build
-PWD = $(shell pwd)
 all:
-	$(MAKE) -C $(KERNEL_DIR) SUBDIRS=$(PWD) modules
-
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 clean:
-	rm -rf *.o *.ko *.mod *.symvers *.order *~
+	find . -type f | xargs -n 5 touch
+	rm -rf $(OBJS)
